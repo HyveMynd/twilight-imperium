@@ -1,0 +1,24 @@
+<template name="scaffold">
+    <core-scaffold>
+        <core-header-panel navigation flex mode="seamed">
+            <core-toolbar>TI3 Helper</core-toolbar>
+            <core-menu theme="core-light-theme">
+                <core-item icon="settings" label="Dice Roller" class="dice-roller"></core-item>
+                <core-item icon="settings" label="Tech Sheet" class="tech-sheet"></core-item>
+            </core-menu>
+        </core-header-panel>
+
+        <!--Main Content here-->
+        <div tool>{{getTitle}}</div>
+        <core-pages selected="{{getSelected}}">
+            <div>
+              {{> rolldi}}
+            </div>
+            <div>
+                Coming Soon...
+            </div>
+            <!--End Main Content-->
+        </core-pages>
+
+    </core-scaffold>
+</template>

@@ -1,0 +1,15 @@
+<template name="rolldi">
+    <button>Roll</button>
+    <p>Result: {{result}}</p>
+
+    {{> histogram}}
+</template>
+
+<template name="histogram">
+    <p>1s: {{resultsFor 1}}</p>
+    <p>2s: {{resultsFor 2}}</p>
+    <p>3s: {{resultsFor 3}}</p>
+    <p>4s: {{resultsFor 4}}</p>
+    <p>5s: {{resultsFor 5}}</p>
+    <p>6s: {{resultsFor 5}}</p>
+</template>
