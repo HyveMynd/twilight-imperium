@@ -36,6 +36,7 @@ Template.battleSim.helpers({
     results: function () {
         var results = Session.get('results');
         var units = Session.get('unitsAvailable');
+        results.reverse();
         for (var i = 0; i < units.length; i++){
             var unit = units[i];
             unit.attacks = [];

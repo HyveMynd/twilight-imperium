@@ -1,11 +1,15 @@
 <template name="battleSim">
     {{#each units}}
-        <h4>{{name}}</h4>
-        <paper-button class="plus" value="{{name}}">&plus;</paper-button>
-        <label>{{numUnits name}}</label>
-        <paper-button class="minus" value="{{name}}">&minus;</paper-button>
+        <paper-item noink>
+            <label>{{name}}</label>
+        </paper-item>
+        <paper-item noink>
+            <paper-button class="plus" value="{{name}}">&plus;</paper-button>
+            <label>{{numUnits name}}</label>
+            <paper-button class="minus" value="{{name}}">&minus;</paper-button>
+        </paper-item>
     {{/each}}
-    {{> dieRoller sides=10 numDi=unitsAvailable}}
+    {{> dieRoller sides=10 numDie=unitsAvailable}}
 
     {{#each results}}
         <h4>{{name}}</h4>
