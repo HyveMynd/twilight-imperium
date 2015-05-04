@@ -3,7 +3,6 @@
  */
 "use strict";
 Session.setDefault('results', []);
-Session.setDefault('histogram', []);
 Session.setDefault('diConfig', { sides: "6", numDi: 0});
 
 var totalDi = (function () {
@@ -22,22 +21,11 @@ Template.rolldi.helpers({
         });
         return results;
     },
-    histogram: function (number) {
-        return Histogram.findOne({value: number}).occurrence;
-    },
     totalDi: function () {
         return totalDi;
     },
     diConfig: function () {
         return Session.get('diConfig');
-    },
-    sides: function () {
-        var sides = Session.get('diConfig').sides;
-        var result = [];
-        for (var i = 0; i < sides; i++){
-            result.push({value:i + 1});
-        }
-        return result;
     },
     rollAttrs: function () {
         return {
@@ -49,9 +37,9 @@ Template.rolldi.helpers({
 
 Template.rolldi.events({
     'click paper-button': function () {
-        // increment the counter when button is clicked
+
+        // roll the di
         var results = [];
-        var histogram = Session.get('histogram');
         var diConfig = Session.get('diConfig');
         var i;
         for (i = 0; i < diConfig.numDi; i++){
@@ -62,7 +50,6 @@ Template.rolldi.events({
 
         // Add to the histogram
         for (i = 0; i <  results.length; i++){
-            histogram.push(results[i].value);
             var histoResult = Histogram.findOne({value: results[i].value});
 
             if (!histoResult){
@@ -71,7 +58,6 @@ Template.rolldi.events({
                 Meteor.call('updateOccurrence', histoResult._id, histoResult.occurrence + 1);
             }
         }
-        Session.set('histogram', histogram);
     },
     'change paper-radio-button': function (event) {
         var di = Session.get('diConfig');

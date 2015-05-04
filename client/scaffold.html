@@ -2,17 +2,25 @@
     <core-scaffold>
         <core-header-panel navigation flex mode="seamed">
             <core-toolbar>TI3 Helper</core-toolbar>
+            {{> loginButtons}}
             <core-menu theme="core-light-theme">
                 <core-item icon="settings" label="Dice Roller" class="dice-roller"></core-item>
+                <core-item icon="settings" label="Histogram" class="histogram"></core-item>
                 <core-item icon="settings" label="Tech Sheet" class="tech-sheet"></core-item>
             </core-menu>
         </core-header-panel>
 
         <!--Main Content here-->
-        <div tool>{{getTitle}}</div>
-        <core-pages selected="{{getSelected}}">
+        <div tool>{{title}}</div>
+        <core-pages selected="{{selected}}">
             <div>
-              {{> rolldi}}
+                {{> rolldi}}
+            </div>
+            <div>
+                {{> histogram}}
+            </div>
+            <div>
+
             </div>
             <div>
                 Coming Soon...

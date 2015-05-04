@@ -18,11 +18,8 @@
         <paper-button {{rollAttrs}}>Roll</paper-button>
         <h6>Config -- Sides: {{diConfig.sides}}</h6>
         <h6>Config -- Number of Di: {{diConfig.numDi}}</h6>
-        <h5>Last Result: {{#each lastResult}}<p style="display: inline">&nbsp;-{{value}}-&nbsp;</p>{{/each}}</h5>
+        <h5>Last Result: {{#each lastResult}}<h4>&nbsp;-{{value}}-&nbsp;</h4>{{/each}}</h5>
     </div>
-
-    {{#each sides}}
-        <p>{{value}}'s: {{histogram value}}</p>
-    {{/each}}
-
 </template>
+
+

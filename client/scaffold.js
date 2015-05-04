@@ -10,17 +10,27 @@ Session.setDefault('title', 'Roll Dice');
 Template.scaffold.events({
     'click .dice-roller': function () {
         Session.set('selected', "0");
+        Session.set('title', 'Roll Dice')
+    },
+    'click .histogram': function () {
+        Session.set('selected','1');
+        Session.set('title', 'Histogram')
+    },
+    'click .battle-sim': function () {
+        Session.set('selected','2');
+        Session.set('title', 'Battle Sim')
     },
     'click .tech-sheet': function () {
-        Session.set('selected','1');
+        Session.set('selected','3');
+        Session.set('title', 'Tech Sheet')
     }
 });
 
 Template.scaffold.helpers({
-    getSelected: function () {
+    selected: function () {
         return Session.get('selected');
     },
-    getTitle: function () {
+    title: function () {
         return Session.get('title');
     }
 });

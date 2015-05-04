@@ -1,8 +1,10 @@
+// Database
+Histogram = new Mongo.Collection('histogram');
+
+
 if (Meteor.isClient) {
 
 }
-
-Histogram = new Mongo.Collection('histogram');
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
@@ -12,7 +14,6 @@ if (Meteor.isServer) {
 
 Meteor.methods({
     updateOccurrence: function (histoId, occurence) {
-        console.log(Histogram.findOne(histoId))
         Histogram.update(histoId, { $set: {occurrence: occurence}});
     },
     insertHistogramValue: function (value) {
