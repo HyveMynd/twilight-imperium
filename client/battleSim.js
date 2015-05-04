@@ -48,8 +48,8 @@ Template.battleSim.helpers({
         return units;
     },
     unitAttrs: function (unitName, value) {
-        console.log(unitName)
-        console.log(value)
+        //console.log(unitName)
+        //console.log(value)
     }
 });
 

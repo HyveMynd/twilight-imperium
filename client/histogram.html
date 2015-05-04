@@ -1,5 +1,10 @@
 <template name="histogram">
-  {{#each sides}}
-      <p>{{value}}'s: {{histogram value}}</p>
-  {{/each}}
+    {{#if currentUser}}
+        {{#each sides}}
+            <p>{{value}}'s: {{histogram value}}</p>
+        {{/each}}
+    {{else}}
+        <paper-item>Please Login to see your personal Histogram</paper-item>
+    {{/if}}
+    <paper-button raised>Clear Data</paper-button>
 </template>

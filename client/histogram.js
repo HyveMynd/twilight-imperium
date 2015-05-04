@@ -13,7 +13,13 @@ Template.histogram.helpers({
         return result;
     },
     histogram: function (number) {
-        var value = Histogram.findOne({value: number});
-        return value ? value.occurrence : null;
+        var histo = Histogram.findOne({owner: Meteor.userId(), value: number});
+        return histo ? histo.occurrence  : 0;
+    }
+});
+
+Template.histogram.events({
+    'click paper-button': function () {
+        Meteor.call('clearHistogram');
     }
 });

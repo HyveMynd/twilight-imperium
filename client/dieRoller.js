@@ -33,10 +33,10 @@ Template.dieRoller.events({
 
         // Add to the histogram
         for (i = 0; i <  results.length; i++){
-            var histoResult = Histogram.findOne({value: results[i].value});
+            var histoResult = Histogram.findOne({owner: Meteor.userId(), value: results[i].value});
 
             if (!histoResult){
-                Meteor.call('insertHistogramValue', results[i].value);
+                Meteor.call('initHistogram', results[i].value);
             } else {
                 Meteor.call('updateOccurrence', histoResult._id, histoResult.occurrence + 1);
             }
