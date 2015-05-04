@@ -16,13 +16,14 @@ var totalDi = (function () {
 
 Template.rolldi.helpers({
     lastResult: function () {
-        return Session.get('results');
+        var results = Session.get('results');
+        results.sort(function (left, right) {
+            return right - left;
+        });
+        return results;
     },
     histogram: function (number) {
-        var histogram = Session.get('histogram');
-        return _.filter(histogram, function (num) {
-            return num === number;
-        }).length;
+        return Histogram.findOne({value: number}).occurrence;
     },
     totalDi: function () {
         return totalDi;
@@ -62,6 +63,13 @@ Template.rolldi.events({
         // Add to the histogram
         for (i = 0; i <  results.length; i++){
             histogram.push(results[i].value);
+            var histoResult = Histogram.findOne({value: results[i].value});
+
+            if (!histoResult){
+                Meteor.call('insertHistogramValue', results[i].value);
+            } else {
+                Meteor.call('updateOccurrence', histoResult._id, histoResult.occurrence + 1);
+            }
         }
         Session.set('histogram', histogram);
     },
