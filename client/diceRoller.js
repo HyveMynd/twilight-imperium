@@ -3,6 +3,7 @@
  */
 "use strict";
 Session.setDefault('results', []);
+Session.setDefault('histogram', []);
 Session.setDefault('diConfig', { sides: "6", numDi: 0});
 
 var totalDi = (function () {
@@ -15,12 +16,11 @@ var totalDi = (function () {
 
 Template.rolldi.helpers({
     lastResult: function () {
-        var results = Session.get('results');
-        return results[results.length-1];
+        return Session.get('results');
     },
-    resultsFor: function (number) {
-        var results = Session.get('results');
-        return _.filter(results, function (num) {
+    histogram: function (number) {
+        var histogram = Session.get('histogram');
+        return _.filter(histogram, function (num) {
             return num === number;
         }).length;
     },
@@ -49,13 +49,21 @@ Template.rolldi.helpers({
 Template.rolldi.events({
     'click paper-button': function () {
         // increment the counter when button is clicked
-        var results = Session.get('results');
+        var results = [];
+        var histogram = Session.get('histogram');
         var diConfig = Session.get('diConfig');
-        for (var i = 0; i < diConfig.numDi; i++){
+        var i;
+        for (i = 0; i < diConfig.numDi; i++){
             var result = Math.floor(Math.random() * diConfig.sides) + 1;
-            results.push(result);
+            results.push({value:result});
         }
         Session.set('results', results);
+
+        // Add to the histogram
+        for (i = 0; i <  results.length; i++){
+            histogram.push(results[i].value);
+        }
+        Session.set('histogram', histogram);
     },
     'change paper-radio-button': function (event) {
         var di = Session.get('diConfig');

@@ -16,21 +16,13 @@
 
     <div>
         <paper-button {{rollAttrs}}>Roll</paper-button>
-        <h5>Config -- Sides: {{diConfig.sides}}</h5>
-        <h5>Config -- Number of Di: {{diConfig.numDi}}</h5>
+        <h6>Config -- Sides: {{diConfig.sides}}</h6>
+        <h6>Config -- Number of Di: {{diConfig.numDi}}</h6>
+        <h5>Last Result: {{#each lastResult}}<p style="display: inline">&nbsp;-{{value}}-&nbsp;</p>{{/each}}</h5>
     </div>
 
     {{#each sides}}
-        <p>{{value}}'s: {{resultsFor value}}</p>
+        <p>{{value}}'s: {{histogram value}}</p>
     {{/each}}
 
-</template>
-
-<template name="histogram">
-    <p>1s: {{resultsFor 1}}</p>
-    <p>2s: {{resultsFor 2}}</p>
-    <p>3s: {{resultsFor 3}}</p>
-    <p>4s: {{resultsFor 4}}</p>
-    <p>5s: {{resultsFor 5}}</p>
-    <p>6s: {{resultsFor 5}}</p>
 </template>
