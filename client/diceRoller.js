@@ -3,10 +3,10 @@
  */
 "use strict";
 Session.setDefault('results', []);
-Session.setDefault('diSideSelection', 0);
-Session.setDefault('diConfig', { sides: "6", numDi: 1});
+Session.setDefault('diSelection', 0);
+Session.setDefault('diConfig', { sides: "6", totalDi: 1});
 
-var numDi = (function () {
+var totalDi = (function () {
     var result = [];
     for (var i = 0; i < 15; i++){
         result.push({value: i + 1});
@@ -19,14 +19,28 @@ Template.rolldi.helpers({
         var results = Session.get('results');
         return results[results.length-1];
     },
-    numDi: function () {
-        return numDi;
+    resultsFor: function (number) {
+        var results = Session.get('results');
+        return _.filter(results, function (num) {
+            return num === number;
+        }).length;
     },
-    diSides: function () {
-        return Session.get('diSideSelection');
+    totalDi: function () {
+        return totalDi;
+    },
+    diSelection: function () {
+        return Session.get('diSelection');
     },
     diConfig: function () {
         return Session.get('diConfig');
+    },
+    sides: function () {
+        var sides = Session.get('diConfig').sides;
+        var result = [];
+        for (var i = 0; i < sides; i++){
+            result.push({value:i + 1});
+        }
+        return result;
     }
 });
 
@@ -35,7 +49,7 @@ Template.rolldi.events({
         // increment the counter when button is clicked
         var results = Session.get('results');
         var diConfig = Session.get('diConfig');
-        for (var i = 0; i < diConfig.numDi; i++){
+        for (var i = 0; i < diConfig.totalDi; i++){
             var result = Math.floor(Math.random() * diConfig.sides) + 1;
             results.push(result);
         }
@@ -49,17 +63,8 @@ Template.rolldi.events({
     'core-select paper-dropdown-menu': function (event) {
         if (event.originalEvent.detail.isSelected) {
             var di = Session.get('diConfig');
-            di.numDi = event.originalEvent.detail.item.innerText;
+            di.totalDi = event.originalEvent.detail.item.innerText;
             Session.set('diConfig', di);
         }
-    }
-});
-
-Template.histogram.helpers({
-    resultsFor: function (number) {
-        var results = Session.get('results');
-        return _.filter(results, function (num) {
-            return num === number;
-        }).length;
     }
 });
