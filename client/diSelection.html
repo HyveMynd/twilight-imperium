@@ -1,0 +1,11 @@
+<template name="diSelection">
+    <paper-dropdown-menu label="Select Number of Di">
+        <paper-dropdown class="dropdown">
+            <core-menu class="menu">
+              {{#each totalDi}}
+                  <paper-item>{{value}}</paper-item>
+              {{/each}}
+            </core-menu>
+        </paper-dropdown>
+    </paper-dropdown-menu>
+</template>

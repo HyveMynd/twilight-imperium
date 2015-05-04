@@ -5,14 +5,6 @@
 Session.setDefault('results', []);
 Session.setDefault('diConfig', { sides: "6", numDi: 0});
 
-var totalDi = (function () {
-    var result = [];
-    for (var i = 0; i < 15; i++){
-        result.push({value: i + 1});
-    }
-    return result;
-})();
-
 Template.rolldi.helpers({
     lastResult: function () {
         var results = Session.get('results');
@@ -20,9 +12,6 @@ Template.rolldi.helpers({
             return right - left;
         });
         return results;
-    },
-    totalDi: function () {
-        return totalDi;
     },
     diConfig: function () {
         return Session.get('diConfig');
