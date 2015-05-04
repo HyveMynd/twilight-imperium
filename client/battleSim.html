@@ -9,12 +9,12 @@
             <paper-button class="minus" value="{{name}}">&minus;</paper-button>
         </paper-item>
     {{/each}}
-    {{> dieRoller sides=10 numDie=unitsAvailable}}
+    {{> dieRoller sides=10 numDie=diceAvailable}}
 
-    {{#each results}}
+    {{#each unitsAvailable}}
         <h4>{{name}}</h4>
-        {{#each attacks}}
-            <p {{unitAttrs name value}}>-&nbsp;{{value}}&nbsp;-</p>
+        {{#each getAttacks name numAttacks threshold}}
+            <paper-item class="{{unitAttrs value threshold}}">-&nbsp;{{value}}&nbsp;-</paper-item>
         {{/each}}
     {{/each}}
 

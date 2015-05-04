@@ -6,13 +6,16 @@
 Session.setDefault('unitsAvailable', []);
 
 Template.battleSim.helpers({
-    unitsAvailable: function () {
+    diceAvailable: function () {
         var units = Session.get('unitsAvailable');
         var dice = 0;
         for (var i = 0; i < units.length; i++){
             dice += units[i].numAttacks;
         }
         return dice;
+    },
+    unitsAvailable: function () {
+        return Session.get('unitsAvailable')
     },
     units: function () {
         var result = [];
@@ -33,23 +36,23 @@ Template.battleSim.helpers({
             return u.name === unit
         }).length
     },
-    results: function () {
+    getAttacks: function (name, numAttacks, threshold) {
         var results = Session.get('results');
-        var units = Session.get('unitsAvailable');
         results.reverse();
-        for (var i = 0; i < units.length; i++){
-            var unit = units[i];
-            unit.attacks = [];
-            for (var j = 0; j < unit.numAttacks; j++){
-                var result = results.pop();
-                unit.attacks.push(result);
+        var attacks = [];
+        for (var i = 0; i < numAttacks; i++){
+            var result = results.pop();
+            if (result) {
+                attacks.push({
+                    value: result.value,
+                    threshold: threshold
+                });
             }
         }
-        return units;
+        return attacks;
     },
-    unitAttrs: function (unitName, value) {
-        //console.log(unitName)
-        //console.log(value)
+    unitAttrs: function (value, threshold) {
+        return value >= threshold && 'success-attack';
     }
 });
 

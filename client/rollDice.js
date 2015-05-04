@@ -2,7 +2,7 @@
  * Created by Andres Monroy (HyveMynd) on 5/3/15.
  */
 "use strict";
-Session.setDefault('results', []);
+Session.setDefault('getAttacks', []);
 Session.setDefault('dieConfig', { sides: "6", numDie: 0});
 
 Template.rollDice.helpers({
