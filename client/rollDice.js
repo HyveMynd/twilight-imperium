@@ -16,12 +16,5 @@ Template.rollDice.events({
         var di = Session.get('diConfig');
         di.sides = event.target.label;
         Session.set('diConfig', di);
-    },
-    'core-select paper-dropdown-menu': function (event) {
-        if (event.originalEvent.detail.isSelected) {
-            var di = Session.get('diConfig');
-            di.numDi = event.originalEvent.detail.item.innerText;
-            Session.set('diConfig', di);
-        }
     }
 });

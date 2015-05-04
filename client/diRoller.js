@@ -6,7 +6,7 @@
 Template.diRoller.helpers({
     rollAttrs: function () {
         return {
-            disabled: Session.get('diConfig').numDi === 0,
+            //disabled: Session.get('diConfig').numDi === 0,
             raised: true
         }
     },

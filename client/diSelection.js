@@ -15,3 +15,13 @@ Template.diSelection.helpers({
         return totalDi;
     }
 });
+
+Template.diSelection.events({
+    'core-select paper-dropdown-menu': function (event) {
+        if (event.originalEvent.detail.isSelected) {
+            var di = Session.get('diConfig');
+            di.numDi = event.originalEvent.detail.item.innerText;
+            Session.set('diConfig', di);
+        }
+    }
+});
