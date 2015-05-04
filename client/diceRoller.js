@@ -3,8 +3,7 @@
  */
 "use strict";
 Session.setDefault('results', []);
-Session.setDefault('diSelection', 0);
-Session.setDefault('diConfig', { sides: "6", totalDi: 1});
+Session.setDefault('diConfig', { sides: "6", numDi: 0});
 
 var totalDi = (function () {
     var result = [];
@@ -28,9 +27,6 @@ Template.rolldi.helpers({
     totalDi: function () {
         return totalDi;
     },
-    diSelection: function () {
-        return Session.get('diSelection');
-    },
     diConfig: function () {
         return Session.get('diConfig');
     },
@@ -41,29 +37,35 @@ Template.rolldi.helpers({
             result.push({value:i + 1});
         }
         return result;
+    },
+    rollAttrs: function () {
+        return {
+                disabled: Session.get('diConfig').numDi === 0,
+                raised: true
+            }
     }
 });
 
 Template.rolldi.events({
-    'click button': function () {
+    'click paper-button': function () {
         // increment the counter when button is clicked
         var results = Session.get('results');
         var diConfig = Session.get('diConfig');
-        for (var i = 0; i < diConfig.totalDi; i++){
+        for (var i = 0; i < diConfig.numDi; i++){
             var result = Math.floor(Math.random() * diConfig.sides) + 1;
             results.push(result);
         }
         Session.set('results', results);
     },
-    'click paper-tab': function (event) {
+    'change paper-radio-button': function (event) {
         var di = Session.get('diConfig');
-        di.sides = event.target.textContent;
+        di.sides = event.target.label;
         Session.set('diConfig', di);
     },
     'core-select paper-dropdown-menu': function (event) {
         if (event.originalEvent.detail.isSelected) {
             var di = Session.get('diConfig');
-            di.totalDi = event.originalEvent.detail.item.innerText;
+            di.numDi = event.originalEvent.detail.item.innerText;
             Session.set('diConfig', di);
         }
     }

@@ -1,12 +1,12 @@
 <template name="rolldi">
-    <paper-tabs selected="{{diSelection}}">
-        <paper-tab value="0">6</paper-tab>
-        <paper-tab value="1">10</paper-tab>
-    </paper-tabs>
+    <paper-radio-group selected="{{diConfig.sides}}">
+        <paper-radio-button name="6" label="6"></paper-radio-button>
+        <paper-radio-button name="10" label="10"></paper-radio-button>
+    </paper-radio-group>
 
     <paper-dropdown-menu label="Select Number of Di" on-core-select="">
         <paper-dropdown class="dropdown">
-            <core-menu class="meun">
+            <core-menu class="menu">
                 {{#each totalDi}}
                     <paper-item>{{value}}</paper-item>
                 {{/each}}
@@ -15,7 +15,7 @@
     </paper-dropdown-menu>
 
     <div>
-        <button>Roll</button>
+        <paper-button {{rollAttrs}}>Roll</paper-button>
         <h5>Config -- Sides: {{diConfig.sides}}</h5>
         <h5>Config -- Number of Di: {{diConfig.numDi}}</h5>
     </div>
