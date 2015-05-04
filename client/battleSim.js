@@ -32,6 +32,23 @@ Template.battleSim.helpers({
         return _.filter(units, function (u) {
             return u.name === unit
         }).length
+    },
+    results: function () {
+        var results = Session.get('results');
+        var units = Session.get('unitsAvailable');
+        for (var i = 0; i < units.length; i++){
+            var unit = units[i];
+            unit.attacks = [];
+            for (var j = 0; j < unit.numAttacks; j++){
+                var result = results.pop();
+                unit.attacks.push(result);
+            }
+        }
+        return units;
+    },
+    unitAttrs: function (unitName, value) {
+        console.log(unitName)
+        console.log(value)
     }
 });
 

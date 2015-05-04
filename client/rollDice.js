@@ -3,18 +3,18 @@
  */
 "use strict";
 Session.setDefault('results', []);
-Session.setDefault('diConfig', { sides: "6", numDi: 0});
+Session.setDefault('dieConfig', { sides: "6", numDie: 0});
 
 Template.rollDice.helpers({
-    diConfig: function () {
-        return Session.get('diConfig');
+    dieConfig: function () {
+        return Session.get('dieConfig');
     }
 });
 
 Template.rollDice.events({
     'change paper-radio-button': function (event) {
-        var di = Session.get('diConfig');
+        var di = Session.get('dieConfig');
         di.sides = event.target.label;
-        Session.set('diConfig', di);
+        Session.set('dieConfig', di);
     }
 });

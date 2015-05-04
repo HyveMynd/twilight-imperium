@@ -5,7 +5,7 @@
 
 Template.histogram.helpers({
     sides: function () {
-        var sides = Session.get('diConfig').sides;
+        var sides = Session.get('dieConfig').sides;
         var result = [];
         for (var i = 0; i < sides; i++){
             result.push({value:i + 1});

@@ -3,10 +3,10 @@
  */
 "use strict";
 
-Template.diRoller.helpers({
+Template.dieRoller.helpers({
     rollAttrs: function () {
         return {
-            //disabled: Session.get('diConfig').numDi === 0,
+            //disabled: Session.get('dieConfig').numDie === 0,
             raised: true
         }
     },
@@ -19,13 +19,13 @@ Template.diRoller.helpers({
     }
 });
 
-Template.diRoller.events({
+Template.dieRoller.events({
     'click paper-button': function () {
 
         // roll the di
         var results = [];
         var i;
-        for (i = 0; i < this.numDi; i++){
+        for (i = 0; i < this.numDie; i++){
             var result = Math.floor(Math.random() * this.sides) + 1;
             results.push({value:result});
         }

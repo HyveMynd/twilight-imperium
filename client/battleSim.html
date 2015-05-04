@@ -5,6 +5,13 @@
         <label>{{numUnits name}}</label>
         <paper-button class="minus" value="{{name}}">&minus;</paper-button>
     {{/each}}
+    {{> dieRoller sides=10 numDi=unitsAvailable}}
 
-    {{> diRoller sides=10 numDi=unitsAvailable}}
+    {{#each results}}
+        <h4>{{name}}</h4>
+        {{#each attacks}}
+            <p {{unitAttrs name value}}>-&nbsp;{{value}}&nbsp;-</p>
+        {{/each}}
+    {{/each}}
+
 </template>
