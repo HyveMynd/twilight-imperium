@@ -1,6 +1,24 @@
 <template name="rolldi">
-    <button>Roll</button>
-    <p>Result: {{result}}</p>
+    <paper-tabs selected="{{diSides}}">
+        <paper-tab value="0">6</paper-tab>
+        <paper-tab value="1">10</paper-tab>
+    </paper-tabs>
+
+    <paper-dropdown-menu label="Select Number of Di" on-core-select="">
+        <paper-dropdown class="dropdown">
+            <core-menu class="meun">
+                {{#each numDi}}
+                    <paper-item>{{value}}</paper-item>
+                {{/each}}
+            </core-menu>
+        </paper-dropdown>
+    </paper-dropdown-menu>
+
+    <div>
+        <button>Roll</button>
+        <h5>Config -- Sides: {{diConfig.sides}}</h5>
+        <h5>Config -- Number of Di: {{diConfig.numDi}}</h5>
+    </div>
 
     {{> histogram}}
 </template>
