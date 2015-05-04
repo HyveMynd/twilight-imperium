@@ -1,0 +1,15 @@
+<template name="rollDice">
+    <paper-radio-group selected="{{diConfig.sides}}">
+        <paper-radio-button name="6" label="6"></paper-radio-button>
+        <paper-radio-button name="10" label="10"></paper-radio-button>
+    </paper-radio-group>
+
+    {{> diSelection}}
+
+    {{> diRoller sides=diConfig.sides numDi=diConfig.numDi}}
+</template>
+
+
+
+
+
