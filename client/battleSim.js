@@ -4,6 +4,7 @@
 "use strict";
 
 Session.setDefault('unitsAvailable', []);
+Session.setDefault('results', []);
 
 Template.battleSim.helpers({
     diceAvailable: function () {
@@ -66,6 +67,15 @@ Template.battleSim.events({
             threshold: Units[name].threshold
         });
         Session.set('unitsAvailable', units);
+    },
+    'click .minus': function (event) {
+        var name = $(event.target).attr('value');
+        var units = Session.get('unitsAvailable');
+        var index = _.indexOf(_.pluck(units, 'name'), name);
+        if (index >= 0) {
+            units.splice(index, 1);
+            Session.set('unitsAvailable', units);
+        }
     }
 });
 
