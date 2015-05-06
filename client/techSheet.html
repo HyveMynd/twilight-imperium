@@ -1,0 +1,12 @@
+<template name="techSheet">
+    {{#each units}}
+        <paper-item noink>
+            <label>{{name}}</label>
+        </paper-item>
+        <paper-item noink>
+            <paper-button class="plus" value="{{name}}">&plus;</paper-button>
+            <label>{{numUnits name}}</label>
+            <paper-button class="minus" value="{{name}}">&minus;</paper-button>
+        </paper-item>
+    {{/each}}
+</template>

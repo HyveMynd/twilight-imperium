@@ -1,0 +1,12 @@
+<template name="unitChooser">
+    {{#each units}}
+        <paper-item noink>
+            <label>{{name}}</label>
+        </paper-item>
+        <paper-item noink>
+            <paper-button class="plus" data-name="{{name}}" data-storage="{{../storage}}">&plus;</paper-button>
+            <label>{{numUnits name ../storage}}</label>
+            <paper-button class="minus" data-name="{{name}}" data-storage="{{../storage}}">&minus;</paper-button>
+        </paper-item>
+    {{/each}}
+</template>

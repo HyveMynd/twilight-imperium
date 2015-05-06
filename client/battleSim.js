@@ -15,28 +15,25 @@ Template.battleSim.helpers({
         }
         return dice;
     },
-    unitsAvailable: function () {
-        return Session.get('unitsAvailable')
-    },
-    units: function () {
-        var result = [];
-        for (var key in Units){
-            if (Units.hasOwnProperty(key)) {
-                result.push({
-                    name: key,
-                    numAttacks: Units[key].numAttacks,
-                    threshold: Units[key].threshold
-                });
-            }
-        }
-        return result;
-    },
-    numUnits: function (unit) {
-        var units = Session.get('unitsAvailable');
-        return _.filter(units, function (u) {
-            return u.name === unit
-        }).length
-    },
+    //units: function () {
+    //    var result = [];
+    //    for (var key in Units){
+    //        if (Units.hasOwnProperty(key)) {
+    //            result.push({
+    //                name: key,
+    //                numAttacks: Units[key].numAttacks,
+    //                threshold: Units[key].threshold
+    //            });
+    //        }
+    //    }
+    //    return result;
+    //},
+    //numUnits: function (unit) {
+    //    var units = Session.get('unitsAvailable');
+    //    return _.filter(units, function (u) {
+    //        return u.name === unit
+    //    }).length
+    //},
     getAttacks: function () {
         var units = Session.get('unitsAvailable');
         var results = Session.get('results');
@@ -63,25 +60,25 @@ Template.battleSim.helpers({
     }
 });
 
-Template.battleSim.events({
-    'click .plus': function (event) {
-        var name = $(event.target).attr('value');
-        var units = Session.get('unitsAvailable');
-        units.push({
-            name: name,
-            numAttacks: Units[name].numAttacks,
-            threshold: Units[name].threshold
-        });
-        Session.set('unitsAvailable', units);
-    },
-    'click .minus': function (event) {
-        var name = $(event.target).attr('value');
-        var units = Session.get('unitsAvailable');
-        var index = _.indexOf(_.pluck(units, 'name'), name);
-        if (index >= 0) {
-            units.splice(index, 1);
-            Session.set('unitsAvailable', units);
-        }
-    }
-});
+//Template.battleSim.events({
+//    'click .plus': function (event) {
+//        var name = $(event.target).attr('value');
+//        var units = Session.get('unitsAvailable');
+//        units.push({
+//            name: name,
+//            numAttacks: Units[name].numAttacks,
+//            threshold: Units[name].threshold
+//        });
+//        Session.set('unitsAvailable', units);
+//    },
+//    'click .minus': function (event) {
+//        var name = $(event.target).attr('value');
+//        var units = Session.get('unitsAvailable');
+//        var index = _.indexOf(_.pluck(units, 'name'), name);
+//        if (index >= 0) {
+//            units.splice(index, 1);
+//            Session.set('unitsAvailable', units);
+//        }
+//    }
+//});
 
