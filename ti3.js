@@ -1,8 +1,3 @@
-Router.configure({
-    layoutTemplate: 'scaffold',
-    loadingTemplate: 'loading'
-});
-
 if (Meteor.isClient) {
 
 }
