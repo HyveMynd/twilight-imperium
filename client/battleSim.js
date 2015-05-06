@@ -15,39 +15,25 @@ Template.battleSim.helpers({
         }
         return dice;
     },
-    //units: function () {
-    //    var result = [];
-    //    for (var key in Units){
-    //        if (Units.hasOwnProperty(key)) {
-    //            result.push({
-    //                name: key,
-    //                numAttacks: Units[key].numAttacks,
-    //                threshold: Units[key].threshold
-    //            });
-    //        }
-    //    }
-    //    return result;
-    //},
-    //numUnits: function (unit) {
-    //    var units = Session.get('unitsAvailable');
-    //    return _.filter(units, function (u) {
-    //        return u.name === unit
-    //    }).length
-    //},
     getAttacks: function () {
         var units = Session.get('unitsAvailable');
         var results = Session.get('results');
+        var upgrades = Session.get('techUpgrades');
         results.reverse();
 
         var ships = [];
         for (var i = 0; i < units.length; i++) {
-            var shipAttack = { name: units[i].name, attacks: [] } ;
+            var shipAttack = { name: units[i].name, attacks: [] };
+
+            var bonus = _.filter(upgrades, function (tech) {
+                return tech.name === units[i].name;
+            }).length;
             for (var j = 0; j < units[i].numAttacks; j++) {
                 var result = results.pop();
                 if (result) {
                     shipAttack.attacks.push({
                         value: result.value,
-                        threshold: units[i].threshold
+                        threshold: units[i].threshold - bonus
                     });
                 }
             }
@@ -59,26 +45,4 @@ Template.battleSim.helpers({
         return value >= threshold && 'success-attack';
     }
 });
-
-//Template.battleSim.events({
-//    'click .plus': function (event) {
-//        var name = $(event.target).attr('value');
-//        var units = Session.get('unitsAvailable');
-//        units.push({
-//            name: name,
-//            numAttacks: Units[name].numAttacks,
-//            threshold: Units[name].threshold
-//        });
-//        Session.set('unitsAvailable', units);
-//    },
-//    'click .minus': function (event) {
-//        var name = $(event.target).attr('value');
-//        var units = Session.get('unitsAvailable');
-//        var index = _.indexOf(_.pluck(units, 'name'), name);
-//        if (index >= 0) {
-//            units.splice(index, 1);
-//            Session.set('unitsAvailable', units);
-//        }
-//    }
-//});
 

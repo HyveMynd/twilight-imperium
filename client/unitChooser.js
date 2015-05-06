@@ -1,21 +1,20 @@
-/**
- * Created by Andres Monroy (HyveMynd) on 5/5/15.
- */
-"use strict";
+FlattenedUnits = (function () {
+    var result = [];
+    for (var key in Units){
+        if (Units.hasOwnProperty(key)) {
+            result.push({
+                name: key,
+                numAttacks: Units[key].numAttacks,
+                threshold: Units[key].threshold
+            });
+        }
+    }
+    return result;
+})();
 
 Template.unitChooser.helpers({
     units: function () {
-        var result = [];
-        for (var key in Units){
-            if (Units.hasOwnProperty(key)) {
-                result.push({
-                    name: key,
-                    numAttacks: Units[key].numAttacks,
-                    threshold: Units[key].threshold
-                });
-            }
-        }
-        return result;
+        return FlattenedUnits;
     },
     numUnits: function (unit, storage) {
         var units = Session.get(storage);
