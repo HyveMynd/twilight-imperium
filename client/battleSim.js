@@ -37,20 +37,26 @@ Template.battleSim.helpers({
             return u.name === unit
         }).length
     },
-    getAttacks: function (name, numAttacks, threshold) {
+    getAttacks: function () {
+        var units = Session.get('unitsAvailable');
         var results = Session.get('results');
         results.reverse();
-        var attacks = [];
-        for (var i = 0; i < numAttacks; i++){
-            var result = results.pop();
-            if (result) {
-                attacks.push({
-                    value: result.value,
-                    threshold: threshold
-                });
+
+        var ships = [];
+        for (var i = 0; i < units.length; i++) {
+            var shipAttack = { name: units[i].name, attacks: [] } ;
+            for (var j = 0; j < units[i].numAttacks; j++) {
+                var result = results.pop();
+                if (result) {
+                    shipAttack.attacks.push({
+                        value: result.value,
+                        threshold: units[i].threshold
+                    });
+                }
             }
+            ships.push(shipAttack);
         }
-        return attacks;
+        return ships;
     },
     unitAttrs: function (value, threshold) {
         return value >= threshold && 'success-attack';

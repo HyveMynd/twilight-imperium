@@ -11,9 +11,9 @@
     {{/each}}
     {{> dieRoller sides=10 numDie=diceAvailable}}
 
-    {{#each unitsAvailable}}
+    {{#each getAttacks}}
         <h4>{{name}}</h4>
-        {{#each getAttacks name numAttacks threshold}}
+        {{#each attacks}}
             <paper-item class="{{unitAttrs value threshold}}">-&nbsp;{{value}}&nbsp;-</paper-item>
         {{/each}}
     {{/each}}
